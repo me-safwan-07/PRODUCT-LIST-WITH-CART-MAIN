@@ -1,6 +1,6 @@
 
 // import './App.css'
-import Desserts from './components/Desserts'
+import Desserts from './components/Desserts/Desserts'
 
 function App() {
   return (

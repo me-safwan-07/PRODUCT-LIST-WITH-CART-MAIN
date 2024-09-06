@@ -19,37 +19,76 @@ const Desserts: React.FC = () => {
         setTotalAmount(total);
     }, [cart]);
 
+    // useEffect(() => {
+    //     
+    // }, [cart, count, totalAmount]);
+
     // Handler to add items to the cart
     const handleAddToCart = (index: number) => {
-        setCart(prevCart => ({
-            ...prevCart,
-            [index]: (prevCart[index] || 0) + 1
-        }));
+        setCart(prevCart => {
+            const updatedCart = {
+                ...prevCart,
+                [index]: (prevCart[index] || 0) + 1
+            };
+
+            return updatedCart
+        });
+        // setCount(isNaN(count) ? 0 : count);
         setCount(prevCount => prevCount + 1);
     };
 
+    const handleremoveCart = (index: number) => {
+        setCart(prevCart => {
+            const updatedCart = {
+                ...prevCart,
+                [index]: Math.max((prevCart[index] || 1) - 1, 0)
+            }
+            
+            return updatedCart
+        });
+
+        setCount(prevCount => prevCount - 1);
+    }
     // Handler to remove items from the cart
     const handleRemoveFromCart = (index: number) => {
         setCart(prevCart => {
             const updatedCart = { ...prevCart };
-            if (updatedCart[index] > 1) {
-                updatedCart[index]--;
-                setCount(prevCount => prevCount - 1);
-            } else {
-                delete updatedCart[index];
-                setCount(prevCount => prevCount - 1);
-            }
+    
+            // if (updatedCart[index] > 0) {
+            //     updatedCart[index]--;
+    
+                // If the quantity for this item is now zero, remove it from the cart
+                // if (updatedCart[index] === 0) {
+                //     delete updatedCart[index];
+                // }
+            // }
+    
             return updatedCart;
         });
+    
+        // Update the total count based on the updated cart
+        setCount(prevCart => {
+            const totalCount = Object.values(prevCart).reduce((acc, quantity) => acc + quantity, 0);
+            return totalCount;
+        });
     };
+
+    const [isOrderConfirmed, setIsOrderConfirmed] = useState(false);
+
+    const handleConfirmOrder = () => {
+        setIsOrderConfirmed(true); // Show the confirmation message
+    };
+    
 
     return (
         <div className="m-0 md:px-36 px-4 py-12 bg-pink-100 flex flex-col lg:flex-row">
             <div className="lg:w-3/4 w-full">
                 <h1 className="text-4xl py-10 font-bold">Desserts</h1>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    
                     {data.map((cake, index) => (
                         <div key={index} className="m-1 relative rounded-sm">
+                            
                             <img
                                 srcSet={`${cake.image.mobile} 480w, ${cake.image.tablet} 768w, ${cake.image.desktop} 1200w`}
                                 sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 33vw"
@@ -69,7 +108,7 @@ const Desserts: React.FC = () => {
                                         marginTop: '30px',
                                         marginLeft: '0px',
                                     }}>
-                                    <button onClick={() => handleRemoveFromCart(index)}>-</button>
+                                    <button onClick={() => handleremoveCart(index)}>-</button>
                                     {cart[index]}
                                     <button onClick={() => handleAddToCart(index)}>+</button>
                                 </div>
@@ -100,6 +139,11 @@ const Desserts: React.FC = () => {
                         </div>
                     ))}
                 </div>
+                {isOrderConfirmed && (
+                        <div className="mt-4 p-4 bg-green-500 text-white rounded-md">
+                            Order Confirmed!
+                        </div>
+            )}
             </div>
 
             <div className="lg:w-1/4 w-full h-max m-4 lg:m-14 bg-white p-4 rounded-lg">
@@ -135,11 +179,14 @@ const Desserts: React.FC = () => {
                 <div className="pt-4">
                     <button
                         className="rounded-full border px-6 py-2 bg-orange-500 w-full text-white"
+                        onClick={handleConfirmOrder}
                     >
                         Confirm Order
                     </button>
+                    
                 </div>
             </div>
+            
         </div>
     );
 };

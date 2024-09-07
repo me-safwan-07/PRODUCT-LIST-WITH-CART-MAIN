@@ -32,7 +32,7 @@ const DessertItem: React.FC<DessertItemProps> = ({
             />
 
             {cart[index] ? (
-                <div className="border rounded-full absolute z-10 px-3 py-2 bg-white text-sm flex gap-2"
+                <div className="                                           border rounded-full absolute z-10 px-3 py-2 bg-white text-sm flex gap-2"
                     style={{
                         top: '50%',
                         left: '50%',

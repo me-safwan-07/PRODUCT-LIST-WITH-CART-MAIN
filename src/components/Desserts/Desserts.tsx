@@ -52,7 +52,7 @@ const Desserts: React.FC = () => {
     };
 
     return (
-        <div className="m-0 md:px-36 px-4 py-12 bg-pink-100 flex flex-col lg:flex-row">
+        <div className="m-0 md:px-10 px-4 py-12 bg-pink-100 flex flex-col lg:flex-row">
             <div className="lg:w-3/4 w-full">
                 <h1 className="text-4xl py-10 font-bold">Desserts</h1>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

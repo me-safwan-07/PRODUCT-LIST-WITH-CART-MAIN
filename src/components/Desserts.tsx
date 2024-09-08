@@ -143,7 +143,7 @@ const Desserts: React.FC = () => {
                         <div className="mt-4 p-4 bg-green-500 text-white rounded-md">
                             Order Confirmed!
                         </div>
-            )}
+                )}
             </div>
 
             <div className="lg:w-1/4 w-full h-max m-4 lg:m-14 bg-white p-4 rounded-lg">

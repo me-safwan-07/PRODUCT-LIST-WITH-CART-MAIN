@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import data from '../../../data.json';
 import DessertItem from '../DessertItem/DessertItem';
 import Cart from '../Cart/Cart';
+import ConfirmOrder from '../ConfirmOrder';
 
 const Desserts: React.FC = () => {
     const [cart, setCart] = useState<{ [key: number]: number }>({});
@@ -35,7 +36,7 @@ const Desserts: React.FC = () => {
         setCount(prevCount => prevCount - 1);
     };
 
-    const handleRemoveFromCart = (index: number) => {
+    const handleRemoveFromCart = () => { // in parentise if error add (index:number)
         setCart(prevCart => {
             const updatedCart = { ...prevCart };
             return updatedCart;
@@ -67,11 +68,6 @@ const Desserts: React.FC = () => {
                         />
                     ))}
                 </div>
-                {isOrderConfirmed && (
-                    <div className="mt-4 p-4 bg-green-500 text-white rounded-md">
-                        Order Confirmed!
-                    </div>
-                )}
             </div>
 
             <Cart
@@ -81,6 +77,11 @@ const Desserts: React.FC = () => {
                 handleRemoveFromCart={handleRemoveFromCart}
                 handleConfirmOrder={handleConfirmOrder}
             />
+
+            {isOrderConfirmed && (
+                <ConfirmOrder 
+                />
+            )}
         </div>
     );
 };

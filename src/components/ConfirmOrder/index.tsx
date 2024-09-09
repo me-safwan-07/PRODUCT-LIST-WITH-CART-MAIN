@@ -1,7 +1,12 @@
 // import React from 'react'
 // import Cart from '../Cart/Cart'
 // import { ReactComponent as ConfirmIcon } from '../../../public/assets/images/icon-order-confirmed.svg'
-const ConfirmOrder = () =>{
+
+interface ConfirmOrderProps {
+  handleStartNewOrder : () => void;
+}
+const ConfirmOrder: React.FC<ConfirmOrderProps> = ({handleStartNewOrder}) =>{
+    
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
       <div className="bg-white p-6 rounded-lg shadow-lg w-11/12 max-w-sm relative">
@@ -14,9 +19,11 @@ const ConfirmOrder = () =>{
         </div>
         <h2 className="text-xl font-semibold mb-2 text-center">Order Confirmed</h2>
         <p className="text-gray-600 text-center">We hope you enjoy your food!</p>
+          <div className="p-2 m-2 border rounded-lg text-center bg-orange-800">
+            <button onClick={handleStartNewOrder}>Start new order</button>
+          </div>
       </div>
-      <div className="">
-      </div>
+      
     </div>
   )
 }

@@ -31,22 +31,8 @@ const DessertItem: React.FC<DessertItemProps> = ({
                 alt={cake.name}
             />
 
-            {cart[index] ? (
-                <div className="                                           border rounded-full absolute z-10 px-3 py-2 bg-white text-sm flex gap-2"
-                    style={{
-                        top: '50%',
-                        left: '50%',
-                        width: '120px',
-                        height: '45px',
-                        transform: 'translate(-50%, -50%)',
-                        marginTop: '30px',
-                        marginLeft: '0px',
-                    }}>
-                    <button onClick={() => handleremoveCart(index)}>-</button>
-                    {cart[index]}
-                    <button onClick={() => handleAddToCart(index)}>+</button>
-                </div>
-            ) : (
+            {!cart[index] ? (
+                
                 <button
                     className="border rounded-full absolute z-10 px-3 py-2 bg-white text-sm flex gap-2"
                     style={{
@@ -62,6 +48,21 @@ const DessertItem: React.FC<DessertItemProps> = ({
                 >
                     <MdAddShoppingCart /> Add To Cart
                 </button>
+            ) : (
+                <div className="                                           border rounded-full absolute z-10 px-3 py-2 bg-white text-sm flex gap-2"
+                style={{
+                    top: '50%',
+                    left: '50%',
+                    width: '120px',
+                    height: '45px',
+                    transform: 'translate(-50%, -50%)',
+                    marginTop: '30px',
+                    marginLeft: '0px',
+                }}>
+                <button onClick={() => handleremoveCart(index)}>-</button>
+                {cart[index]}
+                <button onClick={() => handleAddToCart(index)}>+</button>
+            </div>
             )}
             <div className="pt-6">
                 <p className="gray">{cake.category}</p>

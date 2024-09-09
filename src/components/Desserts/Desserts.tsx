@@ -52,6 +52,10 @@ const Desserts: React.FC = () => {
         setIsOrderConfirmed(true);
     };
 
+    const handleStartNewOrder = () => {
+        setIsOrderConfirmed(false)
+        setCart([])
+    }
     return (
         <div className="m-0 md:px-10 px-4 py-12 bg-pink-100 flex flex-col lg:flex-row">
             <div className="lg:w-3/4 w-full">
@@ -79,7 +83,8 @@ const Desserts: React.FC = () => {
             />
 
             {isOrderConfirmed && (
-                <ConfirmOrder 
+                <ConfirmOrder
+                    handleStartNewOrder = {handleStartNewOrder}
                 />
             )}
         </div>
